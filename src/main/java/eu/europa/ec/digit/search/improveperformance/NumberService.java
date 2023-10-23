@@ -2,10 +2,7 @@ package eu.europa.ec.digit.search.improveperformance;
 
 import static java.util.stream.Collectors.toList;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Service;
@@ -40,8 +37,19 @@ public class NumberService {
     }
 
     public Integer findSmallestDuplicateImproved(List<Integer> data) {
-        
-        throw new UnsupportedOperationException("Not implemented.");
+
+        Set<Integer> seen = new HashSet<>();
+        Integer smallestDuplicate = null;
+
+        for (Integer num : data) {
+            if (!seen.add(num)) {
+                if (smallestDuplicate == null || num < smallestDuplicate) {
+                    smallestDuplicate = num;
+                }
+            }
+        }
+
+        return smallestDuplicate;
 
     }
 
